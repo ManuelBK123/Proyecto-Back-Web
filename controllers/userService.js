@@ -1,5 +1,6 @@
 const userDAO = require('../models/usersDAO')
 const bcrypt = require('bcrypt')
+const jwt = require('../utils/GenerateJWT')
 
 const userNameValidate = (req, res) => {
     userDAO.findByUsername(req.params.username, data =>{
@@ -58,20 +59,26 @@ const login = (req, res) =>{
         userName : req.body.userName,
         password : req.body.password,
     }
-    userDAO.findByUsername(user.userName, data =>{
-        const result = bcrypt.compareSync(user.password, data.password)
-        console.log(result)
-        if(result){
+    userDAO.findByUsername(user.userName, data => {
+        if(data){
+            if(bcrypt.compareSync(user.password,data.password )){
+                res.send({
+                    status: true,
+                    message : 'Usuario y contraseña correcta',
+                    nombre : data.nombre,
+                    apellidoPaterno: data.apellidoPaterno,
+                    token : jwt.generateToken(data)
+                })
+            }else{
+                res.send({
+                    status : false,
+                    message : 'Contraseña incorrecta'
+                })
+            }
+        } else {
             res.send({
-                status : true,
-                message : "Contraseña valida",
-                nombre : data.nombre,
-                apellidoPaterno: data.apellidoPaterno
-            })
-        }else{
-            res.send({
-                status : false,
-                message : "Contraseña no valida"
+                status: false,
+                message : 'La cuenta de usuario no existe'
             })
         }
     })
