@@ -41,5 +41,19 @@ module.exports = {
             else
                 return okCallback(data)
         })
+    },
+    deleteProducto: (idProducto, callback) => {
+        let sql = 'DELETE FROM productos WHERE idProducto = ?'
+        bd.query(sql,idProducto, (err, data) => {
+            console.log("err =>",err)
+            console.log("data =>",data)
+            try {
+                if (err) throw new Err('Error en la eliminación')
+                return callback(data)
+            }
+            catch (Err) {
+                return callback(null)
+            }
+        })
     }
 }

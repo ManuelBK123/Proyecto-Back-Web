@@ -73,9 +73,29 @@ const addProducto = (req, res) =>{
     })
 }
 
+const deleteProducto = (req, res) => {
+    productosDAO.deleteProducto(req.params.idProducto, data => {
+        try {
+            if (!data) throw new Err("Hubo un error en el proceso")
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del idRol: ${req.params.idProducto}`)
+            res.send({
+                status: true,
+                message: `Eliminación de idRol: ${req.params.idRol} fue exitosa`
+            })
+        }
+        catch (Err) {
+            res.send({
+                status: false,
+                message: 'Ocurrio un problema al tratar de eliminar el rol'
+            })
+        }
+    })
+}
+
 module.exports = {
     getAllProductos,
     getProductoId,
     getProductoNombre,
     addProducto,
+    deleteProducto
 }

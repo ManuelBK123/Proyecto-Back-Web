@@ -56,8 +56,28 @@ const addProveedor = (req, res) =>{
     })
 }
 
+const deleteProveedor = (req, res) => {
+    proveedoresDAO.deleteProveedor(req.params.idProveedor, data => {
+        try {
+            if (!data) throw new Err("Hubo un error en el proceso")
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del idRol: ${req.params.idProveedor}`)
+            res.send({
+                status: true,
+                message: `Eliminación de idRol: ${req.params.idProveedor} fue exitosa`
+            })
+        }
+        catch (Err) {
+            res.send({
+                status: false,
+                message: 'Ocurrio un problema al tratar de eliminar el rol'
+            })
+        }
+    })
+}
+
 module.exports = {
     getAllProveedores,
     getProveedorId,
     addProveedor,
+    deleteProveedor
 }
