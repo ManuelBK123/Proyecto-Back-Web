@@ -30,5 +30,17 @@ module.exports = {
             else
                 return  callback(data)
         })
+    },
+    deleteUser: (idUser, callback) => {
+        let sql = 'DELETE FROM users WHERE idUser = ?'
+        bd.query(sql,idUser, (err, data) => {
+            try {
+                if (err) throw new Err('Error en la eliminación')
+                return callback(data)
+            }
+            catch (Err) {
+                return callback(null)
+            }
+        })
     }
 }

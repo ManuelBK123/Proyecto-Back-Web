@@ -83,9 +83,29 @@ const login = (req, res) =>{
         }
     })
 }
+
+const deleteUser = (req, res) => {
+    userDAO.deleteUser(req.params.idUser, data => {
+        try {
+            if (!data) throw new Err("Hubo un error en el proceso")
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del Usuario: ${req.params.idUser}`)
+            res.send({
+                status: true,
+                message: `Eliminación del Usuario: ${req.params.idUser} fue exitosa`
+            })
+        }
+        catch (Err) {
+            res.send({
+                status: false,
+                message: 'Error al eliminar el Usuario'
+            })
+        }
+    })
+}
 module.exports = {
     userNameValidate,
     getAllUsers,
     signUp,
-    login
+    login,
+    deleteUser
 }

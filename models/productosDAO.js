@@ -5,7 +5,6 @@ module.exports = {
         let sql = 'SELECT * FROM productos WHERE idProducto=?'
         bd.query(sql,idProducto, (err, data) => {
             if (err) throw err
-
             if (data.length>0)
                 callback(data[0])
             else
@@ -45,8 +44,6 @@ module.exports = {
     deleteProducto: (idProducto, callback) => {
         let sql = 'DELETE FROM productos WHERE idProducto = ?'
         bd.query(sql,idProducto, (err, data) => {
-            console.log("err =>",err)
-            console.log("data =>",data)
             try {
                 if (err) throw new Err('Error en la eliminación')
                 return callback(data)

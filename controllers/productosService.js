@@ -77,16 +77,16 @@ const deleteProducto = (req, res) => {
     productosDAO.deleteProducto(req.params.idProducto, data => {
         try {
             if (!data) throw new Err("Hubo un error en el proceso")
-            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del idRol: ${req.params.idProducto}`)
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del Producto: ${req.params.idProducto}`)
             res.send({
                 status: true,
-                message: `Eliminación de idRol: ${req.params.idRol} fue exitosa`
+                message: `Eliminación del Producto: ${req.params.idProducto} fue exitosa`
             })
         }
         catch (Err) {
             res.send({
                 status: false,
-                message: 'Ocurrio un problema al tratar de eliminar el rol'
+                message: 'Error al eliminar el producto'
             })
         }
     })

@@ -27,5 +27,6 @@ router.get('/usernameValidate/:username',userServices.userNameValidate)
 router.get('/getAllUsers', userServices.getAllUsers)
 router.post('/signUp',userServices.signUp)
 router.post('/login',userServices.login)
+router.delete('/deleteUser/:idUser', userServices.deleteUser);
 
 module.exports = router;

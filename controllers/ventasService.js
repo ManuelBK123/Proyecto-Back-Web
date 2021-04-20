@@ -57,8 +57,28 @@ const addVenta = (req, res) =>{
     })
 }
 
+const deleteVenta = (req, res) => {
+    ventasDAO.deleteVenta(req.params.idVenta, data => {
+        try {
+            if (!data) throw new Err("Hubo un error en el proceso")
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación de la Venta: ${req.params.idVenta}`)
+            res.send({
+                status: true,
+                message: `Eliminación de Venta: ${req.params.idVenta} fue exitosa`
+            })
+        }
+        catch (Err) {
+            res.send({
+                status: false,
+                message: 'Error al eliminar la Venta'
+            })
+        }
+    })
+}
+
 module.exports = {
     getAllVentas,
     getVentaId,
     addVenta,
+    deleteVenta
 }
