@@ -1,10 +1,14 @@
 const mysql = require('mysql')
 
 const config = {
-    host: 'localhost',
-    user: 'programacion.react',
+    /*
+     host: 'localhost',
+     user: 'programacion.react',
+     */
+    host: 'base-datos-manuel-universidad.cgutotuqauwy.us-east-1.rds.amazonaws.com',
+    user: 'admin',
     database: 'tienda',
-    password: '123456'
+    password: 'Percucionista13.'
 }
 const conn = mysql.createConnection(config);
 conn.connect(function(err) {
