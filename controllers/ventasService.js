@@ -38,9 +38,7 @@ const addVenta = (req, res) =>{
         idProducto : req.body.idProducto,
         cantidad : req.body.cantidad,
         total : req.body.total,
-        fecha: req.body.fecha,
-        hora : req.body.hora,
-        idUsuario : req.body.idUsuario
+        fecha: 'now()',
     }
     ventasDAO.insertVenta(venta, (data) =>{
         if(data && data.affectedRows === 1){

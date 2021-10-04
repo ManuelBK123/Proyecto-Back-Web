@@ -2,11 +2,12 @@ const mysql = require('mysql')
 
 const config = {
     /*
-     host: 'localhost',
-     user: 'programacion.react',
-     */
-    host: 'base-datos-manuel-universidad.cgutotuqauwy.us-east-1.rds.amazonaws.com',
+     host: 'base-datos-manuel-universidad.cgutotuqauwy.us-east-1.rds.amazonaws.com',
     user: 'admin',
+     */
+
+    host: 'localhost',
+    user: 'programacion.react',
     database: 'tienda',
     password: 'Percucionista13.'
 }
